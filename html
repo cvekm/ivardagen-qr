@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Evangeliebiblioteket</title>
+  <title>I vardagen – Gospel Living</title>
   <style>
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -20,11 +20,11 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.08);
       text-align: center;
     }
-    h1 { font-size: 20px; margin-bottom: 12px; }
-    p { color: #444; line-height: 1.4; }
+    h1 { font-size: 20px; margin: 0 0 12px; }
+    p { color: #444; line-height: 1.4; margin: 0 0 14px; }
     a.btn {
       display: block;
-      margin: 14px 0;
+      margin: 12px 0;
       padding: 14px;
       border-radius: 12px;
       text-decoration: none;
@@ -32,6 +32,7 @@
       border: 1px solid #111;
       color: #111;
     }
+    .small { font-size: 12px; color: #666; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -39,24 +40,31 @@
     <h1>Öppnar appbutiken…</h1>
     <p>Om du inte skickas vidare automatiskt, välj din enhet:</p>
 
-    <a class="btn" id="ios">iPhone – App Store</a>
-    <a class="btn" id="android">Android – Google Play</a>
+    <a class="btn" id="ios" href="#">iPhone – App Store</a>
+    <a class="btn" id="android" href="#">Android – Google Play</a>
+
+    <div class="small">App: Gospel Living</div>
   </div>
 
   <script>
-    const IOS_URL =
-      "https://apps.apple.com/se/app/gospel-living/id1245330433";
-    const ANDROID_URL =
-      "https://play.google.com/store/apps/details?id=org.lds.liv";
+    // Officiella butikslänkar för Gospel Living
+    const IOS_URL = "https://apps.apple.com/se/app/gospel-living/id1245330433";
+    const ANDROID_URL = "https://play.google.com/store/apps/details?id=org.lds.liv";
 
     document.getElementById("ios").href = IOS_URL;
     document.getElementById("android").href = ANDROID_URL;
 
     const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
+    const isIOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    const isAndroid = /Android/.test(ua);
+
+    if (isIOS) {
       window.location.replace(IOS_URL);
-    } else if (/Android/.test(ua)) {
+    } else if (isAndroid) {
       window.location.replace(ANDROID_URL);
     }
   </script>
