@@ -1,64 +1,22 @@
 <!doctype html>
-<html lang="sv">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gospel Living</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      margin: 0;
-      padding: 24px;
-      background: #f7f7f7;
-    }
-    .card {
-      max-width: 520px;
-      margin: 40px auto;
-      background: #fff;
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-      text-align: center;
-    }
-    h1 { font-size: 20px; margin-bottom: 12px; }
-    p { color: #444; line-height: 1.4; }
-    a.btn {
-      display: block;
-      margin: 14px 0;
-      padding: 14px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 1px solid #111;
-      color: #111;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Redirect</title>
 </head>
 <body>
-  <div class="card">
-    <h1>Öppnar appbutiken…</h1>
-    <p>Om du inte skickas vidare automatiskt, välj din enhet:</p>
+<script>
+  const IOS_URL = "https://apps.apple.com/se/app/gospel-living/id1245330433";
+  const ANDROID_URL = "https://play.google.com/store/apps/details?id=org.lds.liv";
 
-    <a class="btn" id="ios">iPhone – App Store</a>
-    <a class="btn" id="android">Android – Google Play</a>
-  </div>
+  const ua = navigator.userAgent || "";
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-  <script>
-    const IOS_URL =
-      "https://apps.apple.com/se/app/gospel-living/id1245330433";
-    const ANDROID_URL =
-      "https://play.google.com/store/apps/details?id=org.lds.liv";
-
-    document.getElementById("ios").href = IOS_URL;
-    document.getElementById("android").href = ANDROID_URL;
-
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-
-    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) {
-      window.location.replace(IOS_URL);
-    } else if (/Android/.test(ua)) {
-      window.location.replace(ANDROID_URL);
-    }
-  </script>
+  if (isIOS) location.replace(IOS_URL);
+  else if (isAndroid) location.replace(ANDROID_URL);
+  else location.replace(IOS_URL); // fallback om okänd enhet
+</script>
 </body>
 </html>
